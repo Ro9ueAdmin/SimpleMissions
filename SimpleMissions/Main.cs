@@ -1,5 +1,6 @@
 ﻿using GTA;
 using GTA.Math;
+using GTA.Native;
 using SimpleMissions.Attributes;
 using System;
 using System.Collections.Generic;
@@ -26,22 +27,16 @@ namespace SimpleMissions
         {
             if (Game.Player.IsDead && Mission.isOnMission)
             {
-                Mission.isOnMission = false;
-                Mission.currentMission = null;
-                Mission.missionType = null;
+                Mission.currentMission.Fail("The player died.");
             }
 
 
             // Tick missions and draw blips if necessary
             foreach (var mission in Mission.missions)
             {
-                var constructor = mission.GetConstructor(Type.EmptyTypes);
-                var typeClass = constructor.Invoke(new object[] { });
-                var mis = (Mission)typeClass;
-
                 if (Mission.isOnMission && Mission.missionType == mission)
                 { 
-                    mis.Tick();
+                    Mission.currentMission.Tick();
                 }
 
                 // BLIP MANAGEMENT BEGIN

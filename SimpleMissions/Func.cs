@@ -42,7 +42,7 @@ namespace SimpleMissions
             Mission.currentMission = mis;
             Mission.missionType = mission;
             Mission.isOnMission = true;
-            mis.Start();
+            Mission.currentMission.Start();
             GTA.Script.Wait(1000);
             Game.FadeScreenIn(1000);
         }

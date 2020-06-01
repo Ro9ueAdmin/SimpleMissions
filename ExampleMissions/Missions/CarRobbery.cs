@@ -12,15 +12,12 @@ namespace ExampleMissions.Missions
     [MissionInfo("Car Robbery", "exMisCarRob", 485.979f, -1311.222f, 29.249f, MissionType.Default, 2500, "None", Characters.Franklin)]
     public class CarRobbery : Mission
     {
-        /// <summary>
-        /// All of the variables the mission uses. These MUST be static if you intend to modify them at runtime.
-        /// </summary>
-        static int ticks = 0;
-        static MissionState state = MissionState.GoToCar;
-        static Vehicle voltic;
-        static Blip volticBlip;
-        static Blip mansionBlip;
-        static Blip hayesBlip;
+        // All of the variables the mission uses. These MUST be static if you intend to modify them at runtime.
+        MissionState state = MissionState.GoToCar;
+        Vehicle voltic;
+        Blip volticBlip;
+        Blip mansionBlip;
+        Blip hayesBlip;
 
         /// <summary>
         /// The mission setup. This spawns things like vehicles, blips, etc
@@ -39,7 +36,6 @@ namespace ExampleMissions.Missions
             mansionBlip.Name = "Mansion";
             mansionBlip.ShowRoute = true;
             Main.drawnBlips.Add(mansionBlip);
-
             Main.drawnBlips.Add(volticBlip);
         }
 
@@ -48,14 +44,18 @@ namespace ExampleMissions.Missions
         /// </summary>
         public override void Tick()
         {
+            if (voltic.IsDead) Fail("The Voltic was destroyed!");
+
             switch (state)
             {
+                // Go to the Mansion objective
                 case MissionState.GoToCar:
                     UI.ShowSubtitle("Go to the ~y~Mansion");
                     if(World.GetDistance(voltic.Position, Game.Player.Character.Position) <= 25)
                         state = MissionState.StealCar;
                     break;
 
+                // Steal the Voltic objective
                 case MissionState.StealCar:
                     UI.ShowSubtitle("Steal the ~b~Voltic");
                     if(mansionBlip != null)
@@ -67,6 +67,7 @@ namespace ExampleMissions.Missions
                     if (Game.Player.Character.CurrentVehicle == voltic) state = MissionState.GoToHayes;
                     break;
 
+                // Drive the Voltic to Hayes Autos objective
                 case MissionState.GoToHayes:
                     if(volticBlip.Alpha != 0) volticBlip.Alpha = 0;
                     if (hayesBlip == null)
@@ -78,15 +79,16 @@ namespace ExampleMissions.Missions
                         Main.drawnBlips.Add(hayesBlip);
                     }
                     if(hayesBlip.Alpha == 0) hayesBlip.Alpha = 255;
-                    UI.ShowSubtitle("Bring the Voltic to ~y~Hayes Autos");
+                    UI.ShowSubtitle("Drive the Voltic to ~y~Hayes Autos");
                     if (Game.Player.Character.CurrentVehicle != voltic) state = MissionState.ReturnToCar;
                     else if(World.GetDistance(new Vector3(487.549f, -1313.981f, 28.585f), Game.Player.Character.CurrentVehicle.Position) <= 3.5f)
                     {
                         Game.Player.Character.Task.LeaveVehicle(voltic, true);
-                        Stop();
+                        Pass();
                     }
                     break;
 
+                // Get back into the Voltic objective
                 case MissionState.ReturnToCar:
                     volticBlip.Alpha = 255;
                     hayesBlip.Alpha = 0;
@@ -101,17 +103,22 @@ namespace ExampleMissions.Missions
         /// </summary>
         public override void End()
         {
-            Main.drawnBlips.Remove(hayesBlip);
-            Main.drawnBlips.Remove(volticBlip);
-            volticBlip.Remove();
-            hayesBlip.Remove();
-            Main.spawnedVehicles.Remove(voltic);
-            voltic.LockStatus = VehicleLockStatus.CannotBeTriedToEnter;
-            voltic.MarkAsNoLongerNeeded();
+            if(Main.drawnBlips.Contains(hayesBlip))Main.drawnBlips.Remove(hayesBlip);
+            if(Main.drawnBlips.Contains(volticBlip)) Main.drawnBlips.Remove(volticBlip);
+            if (Main.drawnBlips.Contains(mansionBlip)) Main.drawnBlips.Remove(mansionBlip);
+            if(volticBlip != null) volticBlip.Remove();
+            if(hayesBlip != null) hayesBlip.Remove();
+            if (mansionBlip != null) mansionBlip.Remove();
+            if(Main.spawnedVehicles.Contains(voltic)) Main.spawnedVehicles.Remove(voltic);
+            if (voltic != null)
+            {
+                voltic.LockStatus = VehicleLockStatus.CannotBeTriedToEnter;
+                voltic.MarkAsNoLongerNeeded();
+            }
         }
 
         /// <summary>
-        /// The state that the mission is in, this is just an easy and simple way to manage objectives
+        /// The state that the mission is in, this is just a simple way to manage objectives
         /// </summary>
         private enum MissionState
         {

@@ -1,8 +1,10 @@
 ﻿using GTA;
+using GTA.Native;
 using SimpleMissions.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 
 namespace SimpleMissions
 {
@@ -29,15 +31,34 @@ namespace SimpleMissions
         /// <summary>
         /// Stops a mission
         /// </summary>
-        public void Stop()
+        /// <param name="reason">The reason the mission was stopped</param>
+        public void Stop(EndState reason)
         {
             currentMission.End();
 
             MissionInfo info = Func.GetMissionInfo(missionType);
             isOnMission = false;
-            Game.Player.Money += info.pay;
+            if(reason == EndState.Pass) Game.Player.Money += info.pay;
             currentMission = null;
             missionType = null;
+        }
+
+        /// <summary>
+        /// Fails the mission for the specified reason
+        /// </summary>
+        /// <param name="failReason">The reason the mission failed</param>
+        public void Fail(string failReason)
+        {
+
+            Stop(EndState.Fail);
+        }
+
+        /// <summary>
+        /// Passes the mission, this is just to make it a bit more self explanatory for developers to pass missions
+        /// </summary>
+        public void Pass()
+        {
+            Stop(EndState.Pass);
         }
     }
 
@@ -47,5 +68,13 @@ namespace SimpleMissions
     public enum MissionType
     {
         Default, Stranger, Heist, HeistSetup
+    }
+
+    /// <summary>
+    /// The reason a mission ended, this is exclusively used for the Stop function
+    /// </summary>
+    public enum EndState
+    {
+        Fail, Pass
     }
 }
