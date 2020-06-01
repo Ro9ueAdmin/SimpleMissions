@@ -17,7 +17,6 @@ namespace ExampleMissions
             Aborted += OnAbort;
 
             Func.RegisterMission(typeof(CarRobbery));
-            Func.RegisterMission(typeof(ArmoredTruckRobbery));
         }
 
         private void OnAbort(object sender, EventArgs e)

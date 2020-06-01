@@ -46,7 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
-    <Compile Include="Missions\ArmoredTruckRobbery.cs" />
     <Compile Include="Missions\CarRobbery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
