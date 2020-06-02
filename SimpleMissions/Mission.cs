@@ -50,7 +50,13 @@ namespace SimpleMissions
         /// <param name="failReason">The reason the mission failed</param>
         public void Fail(string failReason)
         {
-            // TODO: IMPLEMENT
+            MissionInfo info = Func.GetMissionInfo(missionType);
+
+            Function.Call(Hash.PLAY_MISSION_COMPLETE_AUDIO, "GENERIC_FAILED");
+            while (!Function.Call<bool>(Hash.IS_MISSION_COMPLETE_PLAYING)) Script.Yield();
+            if (info.type == MissionType.Heist) BigMessageThread.MessageInstance.ShowSimpleShard($"Heist Failed", failReason);
+            else if (info.type == MissionType.HeistSetup) BigMessageThread.MessageInstance.ShowSimpleShard($"Heist Setup Failed", failReason);
+            else BigMessageThread.MessageInstance.ShowSimpleShard($"Mission Failed", failReason);
             Stop(EndState.Fail);
         }
 
