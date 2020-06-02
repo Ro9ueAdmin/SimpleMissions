@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NativeUI">
-      <HintPath>C:\Users\Cam\Desktop\NativeUI.dll</HintPath>
-    </Reference>
     <Reference Include="ScriptHookVDotNet2, Version=2.10.12.0, Culture=neutral, processorArchitecture=AMD64">
       <HintPath>..\packages\ScriptHookVDotNet2.2.10.12\lib\net48\ScriptHookVDotNet2.dll</HintPath>
     </Reference>
