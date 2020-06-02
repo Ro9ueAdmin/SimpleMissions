@@ -54,9 +54,9 @@ namespace SimpleMissions
 
             Function.Call(Hash.PLAY_MISSION_COMPLETE_AUDIO, "GENERIC_FAILED");
             while (!Function.Call<bool>(Hash.IS_MISSION_COMPLETE_PLAYING)) Script.Yield();
-            if (info.type == MissionType.Heist) BigMessageThread.MessageInstance.ShowSimpleShard($"Heist Failed", failReason);
-            else if (info.type == MissionType.HeistSetup) BigMessageThread.MessageInstance.ShowSimpleShard($"Heist Setup Failed", failReason);
-            else BigMessageThread.MessageInstance.ShowSimpleShard($"Mission Failed", failReason);
+            if (info.type == MissionType.Heist) BigMessageThread.MessageInstance.ShowSimpleShard($"~r~Heist Failed", failReason);
+            else if (info.type == MissionType.HeistSetup) BigMessageThread.MessageInstance.ShowSimpleShard($"~r~Heist Setup Failed", failReason);
+            else BigMessageThread.MessageInstance.ShowSimpleShard($"~r~Mission Failed", failReason);
             Stop(EndState.Fail);
         }
 
@@ -69,9 +69,9 @@ namespace SimpleMissions
 
             Function.Call(Hash.PLAY_MISSION_COMPLETE_AUDIO, "FRANKLIN_BIG_01");
             while (!Function.Call<bool>(Hash.IS_MISSION_COMPLETE_PLAYING)) Script.Yield();
-            if(info.type == MissionType.Heist) BigMessageThread.MessageInstance.ShowSimpleShard($"Heist Passed", info.displayName);
-            else if(info.type == MissionType.HeistSetup) BigMessageThread.MessageInstance.ShowSimpleShard($"Heist Setup Passed", info.displayName);
-            else BigMessageThread.MessageInstance.ShowSimpleShard($"Mission Passed", info.displayName);
+            if(info.type == MissionType.Heist) BigMessageThread.MessageInstance.ShowSimpleShard($"~y~Heist Passed", info.displayName);
+            else if(info.type == MissionType.HeistSetup) BigMessageThread.MessageInstance.ShowSimpleShard($"~y~Heist Setup Passed", info.displayName);
+            else BigMessageThread.MessageInstance.ShowSimpleShard($"~y~Mission Passed", info.displayName);
             Stop(EndState.Pass);
         }
     }
