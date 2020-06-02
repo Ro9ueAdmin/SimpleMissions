@@ -53,9 +53,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SimpleMissions\SimpleMissionsAPI.csproj">
+    <ProjectReference Include="..\SimpleMissions\SimpleMissions.csproj">
       <Project>{bbafda58-8735-471f-a780-53ccbec784e1}</Project>
-      <Name>SimpleMissionsAPI</Name>
+      <Name>SimpleMissions</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -14,7 +14,7 @@ namespace SimpleMissions
         /// <summary>
         /// Registers a mission so it can be seen and used in-game
         /// </summary>
-        /// <param name="mission"></param>
+        /// <param name="mission">The mission to register</param>
         public static void RegisterMission(Type mission)
         {
             if (mission.GetCustomAttributes(false).FirstOrDefault(x => x.GetType() == typeof(MissionInfo)) == null)

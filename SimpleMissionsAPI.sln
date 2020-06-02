@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleMissionsAPI", "SimpleMissions\SimpleMissionsAPI.csproj", "{BBAFDA58-8735-471F-A780-53CCBEC784E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleMissions", "SimpleMissions\SimpleMissions.csproj", "{BBAFDA58-8735-471F-A780-53CCBEC784E1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleMissions", "ExampleMissions\ExampleMissions.csproj", "{A0A2F7F5-2AA0-436C-BEC1-53E188C6F8E3}"
 EndProject
