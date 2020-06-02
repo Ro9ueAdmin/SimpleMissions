@@ -24,7 +24,6 @@ namespace ExampleMissions.Missions
         /// </summary>
         public override void Start()
         {
-            UI.Notify("Car Robbery started!");
             voltic = World.CreateVehicle(new Model("voltic"), new Vector3(-926.974f, 11.819f, 47.719f), 214.167f);
             Main.spawnedVehicles.Add(voltic);
             volticBlip = voltic.AddBlip();
@@ -50,14 +49,14 @@ namespace ExampleMissions.Missions
             {
                 // Go to the Mansion objective
                 case MissionState.GoToCar:
-                    UI.ShowSubtitle("Go to the ~y~Mansion");
+                    UI.ShowSubtitle("Go to the ~y~Mansion", 1);
                     if(World.GetDistance(voltic.Position, Game.Player.Character.Position) <= 25)
                         state = MissionState.StealCar;
                     break;
 
                 // Steal the Voltic objective
                 case MissionState.StealCar:
-                    UI.ShowSubtitle("Steal the ~b~Voltic");
+                    UI.ShowSubtitle("Steal the ~b~Voltic", 1);
                     if(mansionBlip != null)
                     {
                         Main.drawnBlips.Remove(mansionBlip);
@@ -79,7 +78,7 @@ namespace ExampleMissions.Missions
                         Main.drawnBlips.Add(hayesBlip);
                     }
                     if(hayesBlip.Alpha == 0) hayesBlip.Alpha = 255;
-                    UI.ShowSubtitle("Drive the Voltic to ~y~Hayes Autos");
+                    UI.ShowSubtitle("Drive the Voltic to ~y~Hayes Autos", 1);
                     if (Game.Player.Character.CurrentVehicle != voltic) state = MissionState.ReturnToCar;
                     else if(World.GetDistance(new Vector3(487.549f, -1313.981f, 28.585f), Game.Player.Character.CurrentVehicle.Position) <= 3.5f)
                     {
@@ -92,7 +91,7 @@ namespace ExampleMissions.Missions
                 case MissionState.ReturnToCar:
                     volticBlip.Alpha = 255;
                     hayesBlip.Alpha = 0;
-                    UI.ShowSubtitle("Get back into the ~b~Voltic");
+                    UI.ShowSubtitle("Get back into the ~b~Voltic", 1);
                     if (Game.Player.Character.CurrentVehicle == voltic) state = MissionState.GoToHayes;
                     break;
             }
