@@ -30,7 +30,7 @@ namespace SimpleMissions
                 Mission.currentMission.Fail("The player died.");
             }
 
-
+           
             // Tick missions and draw blips if necessary
             foreach (var mission in Mission.missions)
             {

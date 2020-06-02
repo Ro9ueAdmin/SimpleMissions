@@ -1,5 +1,6 @@
 ﻿using GTA;
 using GTA.Native;
+using NativeUI;
 using SimpleMissions.Attributes;
 using System;
 using System.Collections.Generic;
@@ -49,7 +50,7 @@ namespace SimpleMissions
         /// <param name="failReason">The reason the mission failed</param>
         public void Fail(string failReason)
         {
-
+            // TODO: IMPLEMENT
             Stop(EndState.Fail);
         }
 
@@ -58,6 +59,13 @@ namespace SimpleMissions
         /// </summary>
         public void Pass()
         {
+            MissionInfo info = Func.GetMissionInfo(missionType);
+
+            Function.Call(Hash.PLAY_MISSION_COMPLETE_AUDIO, "FRANKLIN_BIG_01");
+            while (!Function.Call<bool>(Hash.IS_MISSION_COMPLETE_PLAYING)) Script.Yield();
+            if(info.type == MissionType.Heist) BigMessageThread.MessageInstance.ShowSimpleShard($"Heist Passed", info.displayName);
+            else if(info.type == MissionType.HeistSetup) BigMessageThread.MessageInstance.ShowSimpleShard($"Heist Setup Passed", info.displayName);
+            else BigMessageThread.MessageInstance.ShowSimpleShard($"Mission Passed", info.displayName);
             Stop(EndState.Pass);
         }
     }
@@ -67,7 +75,7 @@ namespace SimpleMissions
     /// </summary>
     public enum MissionType
     {
-        Default, Stranger, Heist, HeistSetup
+        Mission, Stranger, Heist, HeistSetup
     }
 
     /// <summary>

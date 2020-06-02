@@ -9,7 +9,7 @@ namespace ExampleMissions.Missions
     /// <summary>
     /// The basic information on the mission. You can learn more about this in the API docs.
     /// </summary>
-    [MissionInfo("Car Robbery", "exMisCarRob", 485.979f, -1311.222f, 29.249f, MissionType.Default, 2500, "None", Characters.Franklin)]
+    [MissionInfo("Car Robbery", "exMisCarRob", 485.979f, -1311.222f, 29.249f, MissionType.Mission, 2500, "None", Characters.Franklin)]
     public class CarRobbery : Mission
     {
         // All of the variables the mission uses. These MUST be static if you intend to modify them at runtime.
