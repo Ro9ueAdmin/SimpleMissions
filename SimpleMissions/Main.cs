@@ -4,6 +4,7 @@ using SimpleMissions.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -12,9 +13,15 @@ namespace SimpleMissions
     internal class Main : Script
     {
         internal static List<Blip> blips = new List<Blip>();
+        internal static string AppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\SimpleMissions";
+        internal static string Saves = AppData + "\\Saves";
 
         public Main()
         {
+            if (!Directory.Exists(AppData)) Directory.CreateDirectory(AppData);
+            if (!Directory.Exists(Saves)) Directory.CreateDirectory(Saves);
+            SaveManager.LoadSave();
+
             Tick += OnTick;
             Aborted += OnAbort;
         }

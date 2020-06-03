@@ -52,6 +52,7 @@
     <Compile Include="NativeUI\BigMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="SaveManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
