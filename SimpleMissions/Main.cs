@@ -226,7 +226,7 @@ namespace SimpleMissions
                                     if (World.GetDistance(new GTA.Math.Vector3(info.xPos, info.yPos, info.zPos - 1.5f), Game.Player.Character.Position) <= 2f && !Mission.isOnMission)
                                     {
                                         UI.ShowHelpMessage($"Press ~y~E~w~ to start {info.displayName}", 1, true);
-                                        if (Game.IsKeyPressed(Keys.E))
+                                        if (Game.IsControlJustPressed(2, GTA.Control.Context))
                                         {
                                             Func.StartMission(mission);
                                         }
