@@ -4,8 +4,6 @@ using NativeUI;
 using SimpleMissions.Attributes;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security;
 
 namespace SimpleMissions
 {
@@ -72,6 +70,16 @@ namespace SimpleMissions
             if(info.type == MissionType.Heist) BigMessageThread.MessageInstance.ShowSimpleShard($"~y~Heist Passed", info.displayName);
             else if(info.type == MissionType.HeistSetup) BigMessageThread.MessageInstance.ShowSimpleShard($"~y~Heist Setup Passed", info.displayName);
             else BigMessageThread.MessageInstance.ShowSimpleShard($"~y~Mission Passed", info.displayName);
+
+            SaveManager.save.completedMissions.Add(info.id);
+            SaveManager.Save();
+
+            foreach (Blip blp in Main.blips)
+            {
+                blp.Remove();
+            }
+            Main.blips.Clear();
+
             Stop(EndState.Pass);
         }
     }
