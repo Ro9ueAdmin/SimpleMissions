@@ -139,8 +139,8 @@ namespace SimpleMissions
                                     if (!Mission.isOnMission) World.DrawMarker(MarkerType.VerticalCylinder, new GTA.Math.Vector3(info.xPos, info.yPos, info.zPos - 1.5f), Vector3.Zero, Vector3.Zero, new Vector3(2, 2, 1), color: Color.Yellow);
                                     if (World.GetDistance(new GTA.Math.Vector3(info.xPos, info.yPos, info.zPos - 1.5f), Game.Player.Character.Position) <= 2f && !Mission.isOnMission)
                                     {
-                                        UI.ShowHelpMessage($"Press ~y~E~w~ to start {info.displayName}", 1, true);
-                                        if (Game.IsKeyPressed(Keys.E))
+                                        UI.ShowHelpMessage($"Press ~INPUT_CONTEXT~ to start {info.displayName}", 1, true);
+                                        if (Game.IsControlJustPressed(2, GTA.Control.Context))
                                         {
                                             Func.StartMission(mission);
                                         }
@@ -182,8 +182,8 @@ namespace SimpleMissions
                                     if (!Mission.isOnMission) World.DrawMarker(MarkerType.VerticalCylinder, new GTA.Math.Vector3(info.xPos, info.yPos, info.zPos - 1.5f), Vector3.Zero, Vector3.Zero, new Vector3(2, 2, 1), color: Color.Yellow);
                                     if (World.GetDistance(new GTA.Math.Vector3(info.xPos, info.yPos, info.zPos - 1.5f), Game.Player.Character.Position) <= 2f && !Mission.isOnMission)
                                     {
-                                        UI.ShowHelpMessage($"Press ~y~E~w~ to start {info.displayName}", 1, true);
-                                        if (Game.IsKeyPressed(Keys.E))
+                                        UI.ShowHelpMessage($"Press ~INPUT_CONTEXT~ to start {info.displayName}", 1, true);
+                                        if (Game.IsControlJustPressed(2, GTA.Control.Context))
                                         {
                                             Func.StartMission(mission);
                                         }
@@ -225,7 +225,7 @@ namespace SimpleMissions
                                     if (!Mission.isOnMission) World.DrawMarker(MarkerType.VerticalCylinder, new GTA.Math.Vector3(info.xPos, info.yPos, info.zPos - 1.5f), Vector3.Zero, Vector3.Zero, new Vector3(2, 2, 1), color: Color.Yellow);
                                     if (World.GetDistance(new GTA.Math.Vector3(info.xPos, info.yPos, info.zPos - 1.5f), Game.Player.Character.Position) <= 2f && !Mission.isOnMission)
                                     {
-                                        UI.ShowHelpMessage($"Press ~y~E~w~ to start {info.displayName}", 1, true);
+                                        UI.ShowHelpMessage($"Press ~INPUT_CONTEXT~ to start {info.displayName}", 1, true);
                                         if (Game.IsControlJustPressed(2, GTA.Control.Context))
                                         {
                                             Func.StartMission(mission);
