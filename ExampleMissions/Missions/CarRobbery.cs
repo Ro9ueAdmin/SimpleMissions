@@ -36,6 +36,8 @@ namespace ExampleMissions.Missions
             mansionBlip.ShowRoute = true;
             Main.drawnBlips.Add(mansionBlip);
             Main.drawnBlips.Add(volticBlip);
+
+            UI.ShowSubtitle("Go to the ~y~Mansion", 15000);
         }
 
         /// <summary>
@@ -49,21 +51,24 @@ namespace ExampleMissions.Missions
             {
                 // Go to the Mansion objective
                 case MissionState.GoToCar:
-                    UI.ShowSubtitle("Go to the ~y~Mansion", 1);
                     if(World.GetDistance(voltic.Position, Game.Player.Character.Position) <= 25)
                         state = MissionState.StealCar;
+                        UI.ShowSubtitle("Steal the ~b~Voltic", 15000);
                     break;
 
                 // Steal the Voltic objective
                 case MissionState.StealCar:
-                    UI.ShowSubtitle("Steal the ~b~Voltic", 1);
                     if(mansionBlip != null)
                     {
                         Main.drawnBlips.Remove(mansionBlip);
                         mansionBlip.Remove();
                         mansionBlip = null;
                     }
-                    if (Game.Player.Character.CurrentVehicle == voltic) state = MissionState.GoToHayes;
+                    if (Game.Player.Character.CurrentVehicle == voltic)
+                    {
+                        state = MissionState.GoToHayes;
+                        UI.ShowSubtitle("Drive the Voltic to ~y~Hayes Autos", 15000);
+                    }
                     break;
 
                 // Drive the Voltic to Hayes Autos objective
@@ -78,9 +83,12 @@ namespace ExampleMissions.Missions
                         Main.drawnBlips.Add(hayesBlip);
                     }
                     if(hayesBlip.Alpha == 0) hayesBlip.Alpha = 255;
-                    UI.ShowSubtitle("Drive the Voltic to ~y~Hayes Autos", 1);
-                    if (Game.Player.Character.CurrentVehicle != voltic) state = MissionState.ReturnToCar;
-                    else if(World.GetDistance(new Vector3(487.549f, -1313.981f, 28.585f), Game.Player.Character.CurrentVehicle.Position) <= 3.5f)
+                    if (Game.Player.Character.CurrentVehicle != voltic)
+                    {
+                        state = MissionState.ReturnToCar;
+                        UI.ShowSubtitle("Get back into the ~b~Voltic", 1);
+                    }
+                    else if (World.GetDistance(new Vector3(487.549f, -1313.981f, 28.585f), Game.Player.Character.CurrentVehicle.Position) <= 3.5f)
                     {
                         Game.Player.Character.Task.LeaveVehicle(voltic, true);
                         Pass();
@@ -91,8 +99,11 @@ namespace ExampleMissions.Missions
                 case MissionState.ReturnToCar:
                     volticBlip.Alpha = 255;
                     hayesBlip.Alpha = 0;
-                    UI.ShowSubtitle("Get back into the ~b~Voltic", 1);
-                    if (Game.Player.Character.CurrentVehicle == voltic) state = MissionState.GoToHayes;
+                    if (Game.Player.Character.CurrentVehicle == voltic)
+                    {
+                        state = MissionState.GoToHayes;
+                        UI.ShowSubtitle("Drive the Voltic to ~y~Hayes Autos", 15000);
+                    }
                     break;
             }
         }

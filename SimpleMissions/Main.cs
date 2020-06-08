@@ -1,5 +1,6 @@
 ﻿using GTA;
 using GTA.Math;
+using GTA.Native;
 using SimpleMissions.Attributes;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,12 @@ namespace SimpleMissions
     internal class Main : Script
     {
         internal static List<Blip> blips = new List<Blip>();
-        internal static string AppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\SimpleMissions";
-        internal static string Saves = AppData + "\\Saves";
+        internal static string modDir = "scripts\\Simple Missions";
+        internal static string Saves = modDir + "\\Saves";
 
         public Main()
         {
-            if (!Directory.Exists(AppData)) Directory.CreateDirectory(AppData);
+            if (!Directory.Exists(modDir)) Directory.CreateDirectory(modDir);
             if (!Directory.Exists(Saves)) Directory.CreateDirectory(Saves);
             SaveManager.LoadSave();
 
