@@ -44,6 +44,12 @@ namespace SimpleMissions
             }
             currentMission = null;
             missionType = null;
+
+            foreach (Blip blp in Main.blips)
+            {
+                blp.Remove();
+            }
+            Main.blips.Clear();
         }
 
         /// <summary>
@@ -77,12 +83,6 @@ namespace SimpleMissions
 
             SaveManager.save.completedMissions.Add(info.id);
             SaveManager.Save();
-
-            foreach (Blip blp in Main.blips)
-            {
-                blp.Remove();
-            }
-            Main.blips.Clear();
 
             Stop(EndState.Pass);
         }

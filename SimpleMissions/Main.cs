@@ -37,7 +37,7 @@ namespace SimpleMissions
             foreach (var mission in Mission.missions)
             {
                 MissionInfo info = Func.GetMissionInfo(mission);
-                if (!SaveManager.save.completedMissions.Contains(info.id))
+                if (info.canBeReplayed || !SaveManager.save.completedMissions.Contains(info.id))
                 {
                     bool allMissionsCompleted = false;
                     var preReq = info.preRequisites.Split(' ');
@@ -79,31 +79,34 @@ namespace SimpleMissions
                         // Create blips
                         if (!Mission.isOnMission && blips.FirstOrDefault(x => x.Position == new GTA.Math.Vector3(info.xPos, info.yPos, info.zPos)) == null)
                         {
-                            var newBlip = World.CreateBlip(new GTA.Math.Vector3(info.xPos, info.yPos, info.zPos));
-                            newBlip.Name = "Mission";
-                            newBlip.Color = BlipColor.White;
-
-                            // Set character specific blip information
-                            switch (info.availableTo)
+                            if (info.canBeReplayed || !SaveManager.save.completedMissions.Contains(info.id))
                             {
-                                case Characters.Franklin:
-                                    newBlip.Sprite = BlipSprite.Franklin;
-                                    newBlip.Color = BlipColor.Franklin;
-                                    newBlip.Name = "Franklin";
-                                    break;
-                                case Characters.Michael:
-                                    newBlip.Sprite = BlipSprite.Michael;
-                                    newBlip.Color = BlipColor.Michael;
-                                    newBlip.Name = "Michael";
-                                    break;
-                                case Characters.Trevor:
-                                    newBlip.Sprite = BlipSprite.Trevor;
-                                    newBlip.Color = BlipColor.Trevor;
-                                    newBlip.Name = "Trevor";
-                                    break;
-                            }
+                                var newBlip = World.CreateBlip(new GTA.Math.Vector3(info.xPos, info.yPos, info.zPos));
+                                newBlip.Name = "Mission";
+                                newBlip.Color = BlipColor.White;
 
-                            blips.Add(newBlip);
+                                // Set character specific blip information
+                                switch (info.availableTo)
+                                {
+                                    case Characters.Franklin:
+                                        newBlip.Sprite = BlipSprite.Franklin;
+                                        newBlip.Color = BlipColor.Franklin;
+                                        newBlip.Name = "Franklin";
+                                        break;
+                                    case Characters.Michael:
+                                        newBlip.Sprite = BlipSprite.Michael;
+                                        newBlip.Color = BlipColor.Michael;
+                                        newBlip.Name = "Michael";
+                                        break;
+                                    case Characters.Trevor:
+                                        newBlip.Sprite = BlipSprite.Trevor;
+                                        newBlip.Color = BlipColor.Trevor;
+                                        newBlip.Name = "Trevor";
+                                        break;
+                                }
+
+                                blips.Add(newBlip);
+                            }
                         }
 
                         // Change the blip according to each character and display start messages

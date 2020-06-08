@@ -9,7 +9,7 @@ namespace ExampleMissions.Missions
     /// <summary>
     /// The basic information on the mission. You can learn more about this in the API docs.
     /// </summary>
-    [MissionInfo("Car Robbery", "exMisCarRob", 485.979f, -1311.222f, 29.249f, MissionType.Mission, false, "None", Characters.Franklin)]
+    [MissionInfo("Car Robbery", "exMisCarRob", 485.979f, -1311.222f, 29.249f, MissionType.Mission, true, "None", Characters.Franklin)]
     public class CarRobbery : Mission
     {
         // All of the variables the mission uses. These MUST be static if you intend to modify them at runtime.
@@ -53,9 +53,11 @@ namespace ExampleMissions.Missions
             {
                 // Go to the Mansion objective
                 case MissionState.GoToCar:
-                    if(World.GetDistance(voltic.Position, Game.Player.Character.Position) <= 25)
+                    if (World.GetDistance(voltic.Position, Game.Player.Character.Position) <= 25)
+                    {
                         state = MissionState.StealCar;
                         UI.ShowSubtitle("Steal the ~b~Voltic", 15000);
+                    }
                     break;
 
                 // Steal the Voltic objective
