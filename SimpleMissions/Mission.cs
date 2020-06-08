@@ -13,6 +13,7 @@ namespace SimpleMissions
         internal static bool isOnMission = false;
         internal static Mission currentMission = null;
         internal static Type missionType = null;
+        public int pay = 2500;
 
         /// <summary>
         /// This is called when a mission is started by the user. Typically this would be used to set up the mission by spawning things like peds and vehicles
@@ -37,7 +38,10 @@ namespace SimpleMissions
 
             MissionInfo info = Func.GetMissionInfo(missionType);
             isOnMission = false;
-            if(reason == EndState.Pass) Game.Player.Money += info.pay;
+            if(reason == EndState.Pass)
+            {
+                Game.Player.Money += currentMission.pay;
+            }
             currentMission = null;
             missionType = null;
         }
