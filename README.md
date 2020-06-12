@@ -2,7 +2,7 @@
 # Simple Missions
 Simple Missions is a library intended for ScriptHookVDotNet mod developers that makes creating missions in GTA V a lot easier. 
 
-### [https://github.com/Starman0620/SimpleMissions/wiki/Getting-Started](Documentation)
+### [Documentation](https://github.com/Starman0620/SimpleMissions/wiki/Getting-Started)
 
 ### Major Features
 * Support for all major mission types (Heists, Heist setups, Regular missions and Strangers & Freaks)
