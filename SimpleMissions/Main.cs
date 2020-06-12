@@ -107,6 +107,7 @@ namespace SimpleMissions
 
                                 blips.Add(newBlip);
                             }
+                            else return;
                         }
 
                         // Change the blip according to each character and display start messages

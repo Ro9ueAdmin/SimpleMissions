@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/Starman0620/SimpleMissions/</projectUrl>
+    <description>$description$</description>
+    <releaseNotes>Initial release</releaseNotes>
+    <copyright>Copyright 2020</copyright>
+    <tags>ScriptHookV ScriptHook GTA GTAV Mission Script GtaMod Scripting</tags>
+	<dependencies>
+		<dependency id="ScriptHookVDotNet2" version="2.10.12"/>
+    </dependencies>
+  </metadata>
+</package>

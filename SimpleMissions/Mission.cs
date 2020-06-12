@@ -34,16 +34,17 @@ namespace SimpleMissions
         /// <param name="reason">The reason the mission was stopped</param>
         public void Stop(EndState reason)
         {
-            currentMission.End();
-
-            MissionInfo info = Func.GetMissionInfo(missionType);
             isOnMission = false;
-            if(reason == EndState.Pass)
-            {
-                Game.Player.Money += currentMission.pay;
-            }
-            currentMission = null;
             missionType = null;
+            int pay = currentMission.pay;
+            currentMission.End();
+            currentMission = null;
+
+            if (reason == EndState.Pass)
+            {
+                Game.Player.Money += pay;
+            }
+            
 
             foreach (Blip blp in Main.blips)
             {
